@@ -94,7 +94,7 @@ test_loader= DataLoader(test_dataset, batch_size=1000, shuffle=True)
 print(f"Training samples: {len(train_dataset)}")
 print(f"Test samples: {len(test_dataset)}") 
 
-class BasicMLP():
+class BasicMLP(nn.Module):
     def __init__(self):
         super(BasicMLP, self).__init__()
         self.flatten = nn.Flatten()
