@@ -50,3 +50,34 @@ def load_mnist_datasets():
             print(f"Alternative download failed: {e2}")
             print("Please manually download MNIST dataset or use the manual download function below")
             raise
+
+def manual_mnist_donwload():
+    import gzip
+    import pickle
+
+    os.makedirs('./data/MNIST/raw', exist_ok=True)
+    urls = {
+        'train-images-idx3-ubyte.gz': 'https://github.com/pytorch/vision/raw/main/torchvision/datasets/utils.py',
+        'train-labels-idx1-ubyte.gz': 'https://github.com/pytorch/vision/raw/main/torchvision/datasets/utils.py',
+        't10k-images-idx3-ubyte.gz': 'https://github.com/pytorch/vision/raw/main/torchvision/datasets/utils.py',
+        't10k-labels-idx1-ubyte.gz': 'https://github.com/pytorch/vision/raw/main/torchvision/datasets/utils.py'
+    }
+    
+    print("manual download")
+
+def generate_dummy_data():
+    from torch.utils.data import TensorDataset
+
+    # dummy ddata
+    train_images = torch.randn(60000, 1, 28, 8)
+    train_labels = torch.randint(0, 10, (60000,))
+    test_images = torch.randn(10000, 1, 28, 8)
+    test_labels = torch.randint(0, 10, (10000,))
+
+    train_datasets = TensorDataset(train_images,train_labels)
+    test_datasets = TensorDataset(test_images, test_labels)
+
+    print("dummy data for testing purposes")
+    return train_datasets, test_datasets
+
+
