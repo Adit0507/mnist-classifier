@@ -109,3 +109,28 @@ class BasicMLP(nn.Module):
         x = self.fc3(x)
 
         return x
+    
+class MLPWithDropout(nn.Module):
+    def __init__(self, dropout_rate=0.3):
+        super(MLPWithDropout, self).__init__()
+
+        self.flatten = nn.Flatten()
+        self.fc1 = nn.Linear(28*28, 512)
+        self.dropout1 = nn.Dropout(dropout_rate)
+        self.fc2 = nn.Linear(512, 256)
+        self.dropout2 = nn.Dropout(dropout_rate)
+        self.fc3 = nn.Linear(256, 128)
+        self.dropout3 = nn.Dropout(dropout_rate)
+        self.fc4 = nn.Linear(128, 10)
+        
+    def forward(self, x):
+        x = self.flatten(x)
+        x = F.relu(self.fc1(x))
+        x = self.dropout1(x)
+        x = F.relu(self.fc2(x))
+        x = self.dropout2(x)
+        x = F.relu(self.fc3(x))
+        x = self.dropout3(x)
+        x = self.fc4(x)
+        
+        return x
