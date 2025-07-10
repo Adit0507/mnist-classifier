@@ -80,4 +80,16 @@ def generate_dummy_data():
     print("dummy data for testing purposes")
     return train_datasets, test_datasets
 
+try:
+    train_dataset, test_dataset =load_mnist_datasets()
+    print("MNIST dataset loaded")
 
+except:
+    print("using dummy data for demo")
+    train_dataset, test_dataset = generate_dummy_data()
+
+train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True)
+test_loader= DataLoader(test_dataset, batch_size=1000, shuffle=True)
+
+print(f"Training samples: {len(train_dataset)}")
+print(f"Test samples: {len(test_dataset)}")
