@@ -92,4 +92,20 @@ train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True)
 test_loader= DataLoader(test_dataset, batch_size=1000, shuffle=True)
 
 print(f"Training samples: {len(train_dataset)}")
-print(f"Test samples: {len(test_dataset)}")
+print(f"Test samples: {len(test_dataset)}") 
+
+class BasicMLP():
+    def __init__(self):
+        super(BasicMLP, self).__init__()
+        self.flatten = nn.Flatten()
+        self.fc1= nn.Linear(28*28, 512)
+        self.fc2= nn.Linear(512, 256)
+        self.fc3= nn.Linear(256, 10)
+
+    def forward(self, x):
+        x = self.flatten(x)
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+
+        return x
